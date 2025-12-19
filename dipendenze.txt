@@ -1,0 +1,2 @@
+flutter pub add flutter_dotenv
+flutter pub add google_generative_ai
