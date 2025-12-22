@@ -14,12 +14,34 @@ class BuongiornoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Calcoliamo l'ora attuale
+    final int ora = DateTime.now().hour;
+
+    final bool isNotte = ora >= 20 || ora < 7;
+
     return MaterialApp(
       title: 'Buongiorno AI',
+
+      // Definiamo il TEMA CHIARO
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.blue,
+            brightness: Brightness.light
+        ),
       ),
+
+      // Definiamo il TEMA SCURO
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo, // L'indaco sta bene col tema scuro
+          brightness: Brightness.dark, // Fondamentale: inverte testi e sfondi
+        ),
+        scaffoldBackgroundColor: const Color(0xFF121212), // Grigio molto scuro per lo sfondo
+      ),
+      // Qui decidiamo quale usare in base all'orario
+      themeMode: isNotte ? ThemeMode.dark : ThemeMode.light,
       home: const HomePage(),
     );
   }
@@ -131,7 +153,8 @@ class _HomePageState extends State<HomePage> {
       icona = Icons.wb_cloudy;
       coloreIcona = Colors.amber;
     }
-
+    // Recuperiamo la luminosità attuale per sapere se siamo in Dark Mode
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -216,27 +239,36 @@ class _HomePageState extends State<HomePage> {
                         ? Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
-                        border: Border.all(color: Colors.blue),
+                        // COLORE DINAMICO:
+                        // Se è notte -> Grigio scuro con bordo indaco
+                        // Se è giorno -> Blu chiaro con bordo blu
+                        color: isDarkMode ? Colors.grey.shade900 : Colors.blue.shade50,
+                        border: Border.all(
+                            color: isDarkMode ? Colors.indigo.shade300 : Colors.blue
+                        ),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Column(
                         children: [
                           Text(
                             _testoSfida,
-                            style: const TextStyle(
+                            style: TextStyle( // Rimuovi il const qui per poter cambiare colore
                                 fontSize: 16,
-                                color: Colors.black87,
+                                // Testo bianco se notte, nero se giorno
+                                color: isDarkMode ? Colors.white : Colors.black87,
                                 fontWeight: FontWeight.bold
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const Divider(color: Colors.blue),
+                          Divider(
+                              color: isDarkMode ? Colors.indigo : Colors.blue
+                          ),
                           Text(
                             _testoCitazione,
                             style: TextStyle(
                                 fontSize: 15,
-                                color: Colors.grey.shade700,
+                                // Testo grigio chiaro se notte, grigio scuro se giorno
+                                color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade700,
                                 fontStyle: FontStyle.italic
                             ),
                             textAlign: TextAlign.center,
