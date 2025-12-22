@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart'; // Per le chiavi segrete
+import 'package:intl/intl.dart'; //per la gestione della data
 import 'dart:math';
 import 'ai_service.dart'; // Importiamo il file che abbiamo appena creato
 
@@ -105,7 +106,7 @@ class _HomePageState extends State<HomePage> {
   // --- LAYOUT ---
   @override
   Widget build(BuildContext context) {
-    String dataOggi = DateTime.now().toLocal().toString().split(' ')[0];
+    String dataOggi = DateFormat('dd/MM/yyyy').format(DateTime.now());
     int oraAttuale = DateTime.now().hour;
 
     // Default Sera/Notte
