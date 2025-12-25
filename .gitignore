@@ -1,0 +1,77 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.env
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# File generati da Flutter e Dart
+# ------------------------------
+.flutter-plugins
+.packages
+build/
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+# File per Android
+# ----------------
+android/**/generated/
+android/key.properties
+*.keystore
+*.jks
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# File di log e temporanei
+# ------------------------
+*.lock
+!pubspec.lock
+
+# Configurazione specifica per Visual Studio Code
+# -----------------------------------------------
+.vscode/
+
+# File per iOS (CocoaPods e certificati)
+# --------------------------------------
+ios/Pods/
+ios/.generated/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/ServiceDefinitions.json
+*.moved-aside
+# File variabili di ambiente (per sicurezza)
+# ------------------------------------------
+.env*
